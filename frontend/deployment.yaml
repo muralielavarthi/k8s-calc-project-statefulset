@@ -25,13 +25,6 @@ spec:
         - name: frontend
           image: muralielavarthi/frontend:2.0.0
           command: ["nginx", "-g", "daemon off;", "-c", "/etc/nginx/nginx.conf"] # override the default command to use our custom nginx.conf
-          resources:
-            requests:
-              memory: "20Mi"
-              cpu: "20m"
-            limits:
-              memory: "40Mi"
-              cpu: "50m"
           volumeMounts:
             - name: nginx-config-volume
               mountPath: /etc/nginx/nginx.conf
