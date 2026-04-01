@@ -24,6 +24,14 @@ spec:
       containers:
         - name: backend
           image: muralielavarthi/backend:2.0.0
-          envFrom:
-            - configMapRef:
-                name: backend-config
+          # envFrom:
+          #   - configMapRef:
+          #       name: backend-config
+          volumeMounts:
+            - name: backend-config-volume
+              mountPath: /app/backend-config
+              subPath: backend-config
+      volumes:
+        - name: backend-config-volume
+          configMap:
+            name: backend-config
