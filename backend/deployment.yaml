@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  namespace: calc-namespace
+  labels:
+    app: backend
+    project: calc
+    division: finance
+spec:
+  replicas: 2
+  selector:
+    matchLabels: # used to identify the pods that belong to this deployment, has to match .spec.template.metadata.labels
+      app: backend
+      project: calc
+      division: finance
+  template:
+    metadata:
+      labels:
+        app: backend
+        project: calc
+        division: finance
+    spec:
+      containers:
+        - name: backend
+          image: muralielavarthi/backend:2.0.0
+          envFrom:
+            - configMapRef:
+                name: backend-config

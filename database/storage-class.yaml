@@ -1,0 +1,18 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: mysql-storage
+  namespace: calc-namespace
+  labels:
+    Project: calc
+    division: finance
+provisioner: ebs.csi.aws.com # The driver that creates the volume
+parameters:
+  type: gp3 # AWS General Purpose SSD
+  fsType: ext4 # Filesystem to be created
+reclaimPolicy: Delete # Automatically delete the volume and pv when PVC is deleted
+allowedTopologies: # Restrict provisioning to specific zones
+  - matchLabelExpressions:
+      - key: topology.kubernetes.io/zone
+        values:
+          - us-east-1a

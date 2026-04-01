@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  namespace: calc-namespace
+  labels:
+    app: frontend
+    project: calc
+    division: finance
+data:
+  nginx.conf: |
+    events {}
+    pid /tmp/nginx.pid;
+
+    http {
+        server {
+            listen 2026;
+
+            location / {
+                root /usr/share/nginx/html;
+                index index.html;
+            }
+
+            location /api/ {
+                proxy_pass http://backend:8080/;
+            }
+        }
+    }

@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend # service name act as dns name for other services to connect
+  namespace: calc-namespace
+  labels:
+    app: backend
+    project: calc
+    division: finance
+spec:
+  selector:
+    app: backend
+    project: calc
+    division: finance
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

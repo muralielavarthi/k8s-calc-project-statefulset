@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc-dynamic
+  namespace: calc-namespace
+  labels:
+    app: mysql
+    project: calc
+    division: finance
+spec:
+  resources:
+    requests:
+      storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: mysql-storage
+  #name of the StorageClass to use for dynamic provisioning, must match the name defined in storage-class.yaml
